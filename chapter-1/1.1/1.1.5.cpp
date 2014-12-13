@@ -166,10 +166,3 @@ public:
 	}
 };
 }
-using namespace bitstr;
-int main() {
-	bit_string b("101101"), d("110110010");
-	b = d - b;
-	b.display();
-	return 0;
-}
