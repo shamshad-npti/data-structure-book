@@ -84,4 +84,53 @@ public:
 		delete elem;
 	}
 };
+
+template <class T>
+class array_using_class {
+	Stack<T> *first;
+	Stack<T> *second;
+	int s;
+	void check_out(int i) {
+		if(i < 0 || i >= s) {
+			exit(0);
+			printf("\n WTF, oops!");
+		}
+	}
+public:
+	array_using_class(int size) : s(size) {
+		first = new Stack<T>(size);
+		second = new Stack<T>(size);
+		T e = NULL;
+		while(size != 0) {
+			first->push(e);
+			size--;
+		}
+	}
+
+	T get(int i) {
+		check_out(i);
+		int j = s - 1;
+		while(j > i) {
+			j--;
+			second->push(first->pop());
+		}
+		T e = first->pop();
+		while(!second->empty())
+			first->push(second->pop());
+		return e;
+	}
+
+	void set(int i, T v) {
+		check_out(i);
+		int j = s - 1;
+		while(j != i) {
+			second->push(first->pop());
+			j--;
+		}
+		first->pop();
+		first->push(v);
+		while(!second->empty())
+			first->push(second->pop());
+	}
+};
 }
